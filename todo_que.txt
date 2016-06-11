@@ -15,7 +15,3 @@
 //hologram zombies
 //stunning zombie
 //optimal zombie
-
-
-zombie image coords ref
-down left: 
