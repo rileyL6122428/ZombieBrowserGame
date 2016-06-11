@@ -1,0 +1,21 @@
+// add util class
+// add inheritance for zombie and player into moving Object
+// build wall
+
+
+//bringing them backspace
+//invisible
+//runners
+//berserkers
+
+//List of possible zombies
+//projectile shoot
+//teleporting intercept
+//attracting zombies
+//hologram zombies
+//stunning zombie
+//optimal zombie
+
+
+zombie image coords ref
+down left: 

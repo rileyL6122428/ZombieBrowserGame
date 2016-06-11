@@ -1,0 +1,41 @@
+var image = document.getElementById("test");
+
+// Zombie down
+this.ctx.drawImage(image, 0, 23, 33, 42, 0, 0, 45, 60);
+this.ctx.drawImage(image, 33, 23, 33, 42, 45, 0, 45, 60);
+this.ctx.drawImage(image, 64, 23, 33, 42, 90, 0, 45, 60);
+
+//zombie left
+this.ctx.drawImage(image, 0, 85, 33, 42, 0, 80, 45, 60);
+this.ctx.drawImage(image, 64, 85, 33, 42, 45, 80, 45, 60);
+this.ctx.drawImage(image, 33, 85, 33, 42, 90, 80, 45, 60);
+
+//zombie right
+this.ctx.drawImage(image, 0, 150, 33, 42, 0, 160, 45, 60);
+this.ctx.drawImage(image, 64, 150, 33, 42, 45, 160, 45, 60);
+this.ctx.drawImage(image, 33, 150, 33, 42, 90, 160, 45, 60);
+
+//zombie up
+this.ctx.drawImage(image, 0, 215, 33, 42, 0, 240, 45, 60);
+this.ctx.drawImage(image, 33, 215, 33, 42, 45, 240, 45, 60);
+this.ctx.drawImage(image, 64, 215, 33, 42, 90, 240, 45, 60);
+
+// Skeleton down
+this.ctx.drawImage(image, 97, 15, 31, 50, 200, 0, 45, 65);
+this.ctx.drawImage(image, 129, 15, 31, 50, 250, 0, 45, 65);
+this.ctx.drawImage(image, 160, 15, 31, 50, 300, 0, 45, 65);
+
+// Skeleton left
+this.ctx.drawImage(image, 97,  80, 31, 50, 200, 100, 45, 65);
+this.ctx.drawImage(image, 129, 80, 31, 50, 250, 100, 45, 65);
+this.ctx.drawImage(image, 160, 80, 31, 50, 300, 100, 45, 65);
+
+//Skeleton right
+this.ctx.drawImage(image, 97,  140, 31, 50, 200, 200, 45, 65);
+this.ctx.drawImage(image, 129, 140, 31, 50, 250, 200, 45, 65);
+this.ctx.drawImage(image, 160, 140, 31, 50, 300, 200, 45, 65);
+
+//Skeleton down
+this.ctx.drawImage(image, 97,  205, 31, 50, 200, 300, 45, 65);
+this.ctx.drawImage(image, 129, 205, 31, 50, 250, 300, 45, 65);
+this.ctx.drawImage(image, 160, 205, 31, 50, 300, 300, 45, 65);
