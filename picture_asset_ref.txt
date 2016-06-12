@@ -60,3 +60,20 @@ this.ctx.drawImage(this.playerImage, 120, 67, 21, 30, 70, 140, 35, 50);
 this.ctx.drawImage(this.playerImage, 75, 98, 21, 30, 20, 200, 35, 50);
 this.ctx.drawImage(this.playerImage, 95, 98, 21, 30, 40, 200, 35, 50);
 this.ctx.drawImage(this.playerImage, 120, 98, 21, 30, 70, 200, 35, 50);
+
+//warp down
+this.ctx.drawImage(this.image, 190, 160, 27, 35, 300, 300, 35, 50);
+this.ctx.drawImage(this.image, 190, 192, 27, 34, 300, 360, 35, 50);
+this.ctx.drawImage(this.image, 140, 225, 27, 34, 300, 420, 35, 50);
+
+//warp right
+this.ctx.drawImage(this.image, 215, 128, 27, 34, 300, 240, 35, 50);
+this.ctx.drawImage(this.image, 261, 160, 27, 35, 300, 300, 35, 50);
+this.ctx.drawImage(this.image, 190, 129, 27, 32, 300, 360, 35, 50);
+this.ctx.drawImage(this.image, 239, 129, 27, 34, 300, 420, 35, 50);
+
+//warp right
+this.ctx.drawImage(this.image, 261, 128, 27, 34, 300, 240, 35, 50);
+this.ctx.drawImage(this.image, 215, 160, 27, 35, 300, 300, 35, 50);
+this.ctx.drawImage(this.image, 190, 225, 27, 32, 300, 360, 35, 50);
+this.ctx.drawImage(this.image, 71, 225, 25, 34, 300, 420, 35, 50);
