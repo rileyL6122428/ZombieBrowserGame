@@ -39,3 +39,24 @@ this.ctx.drawImage(image, 160, 140, 31, 50, 300, 200, 45, 65);
 this.ctx.drawImage(image, 97,  205, 31, 50, 200, 300, 45, 65);
 this.ctx.drawImage(image, 129, 205, 31, 50, 250, 300, 45, 65);
 this.ctx.drawImage(image, 160, 205, 31, 50, 300, 300, 45, 65);
+
+
+//player Upwards
+this.ctx.drawImage(this.playerImage, 75, 1, 21, 30, 20, 20, 35, 50);
+this.ctx.drawImage(this.playerImage, 95, 1, 21, 30, 40, 20, 35, 50);
+this.ctx.drawImage(this.playerImage, 120, 1, 21, 30, 70, 20, 35, 50);
+
+//player Right
+this.ctx.drawImage(this.playerImage, 75, 33, 21, 30, 20, 80, 35, 50);
+this.ctx.drawImage(this.playerImage, 95, 33, 21, 30, 40, 80, 35, 50);
+this.ctx.drawImage(this.playerImage, 120, 33, 22, 30, 70, 80, 35, 50);
+
+//player Downwards
+this.ctx.drawImage(this.playerImage, 75, 67, 21, 30, 20, 140, 35, 50);
+this.ctx.drawImage(this.playerImage, 95, 67, 21, 30, 40, 140, 35, 50);
+this.ctx.drawImage(this.playerImage, 120, 67, 21, 30, 70, 140, 35, 50);
+
+//player Left
+this.ctx.drawImage(this.playerImage, 75, 98, 21, 30, 20, 200, 35, 50);
+this.ctx.drawImage(this.playerImage, 95, 98, 21, 30, 40, 200, 35, 50);
+this.ctx.drawImage(this.playerImage, 120, 98, 21, 30, 70, 200, 35, 50);

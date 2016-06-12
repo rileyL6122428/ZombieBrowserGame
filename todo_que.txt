@@ -1,17 +1,8 @@
-// add util class
-// add inheritance for zombie and player into moving Object
-// build wall
 
+build demo
 
-//bringing them backspace
-//invisible
-//runners
-//berserkers
-
-//List of possible zombies
-//projectile shoot
-//teleporting intercept
-//attracting zombies
-//hologram zombies
-//stunning zombie
-//optimal zombie
+2) lighting torches
+3) basic map with gate
+4) open screen
+5) close screen
+6) character warp
