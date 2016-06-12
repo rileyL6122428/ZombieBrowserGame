@@ -1,8 +1,7 @@
 
 build demo
 
-2) lighting torches
 3) basic map with gate
+6) character warp
 4) open screen
 5) close screen
-6) character warp
