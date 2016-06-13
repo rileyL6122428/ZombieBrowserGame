@@ -72,7 +72,7 @@ this.ctx.drawImage(this.image, 261, 160, 27, 35, 300, 300, 35, 50);
 this.ctx.drawImage(this.image, 190, 129, 27, 32, 300, 360, 35, 50);
 this.ctx.drawImage(this.image, 239, 129, 27, 34, 300, 420, 35, 50);
 
-//warp right
+//warp up
 this.ctx.drawImage(this.image, 261, 128, 27, 34, 300, 240, 35, 50);
 this.ctx.drawImage(this.image, 215, 160, 27, 35, 300, 300, 35, 50);
 this.ctx.drawImage(this.image, 190, 225, 27, 32, 300, 360, 35, 50);
