@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 
 <style>
+  html, body {
+    width:  100%;
+    height: 100%;
+    margin: 0px;
+  }
+
   img {
     height: 0px;
     width: 0px;
+  }
+
+  canvas {
+    background-color: "black";
   }
 </style>
 <html>
@@ -12,11 +22,13 @@
     <title></title>
   </head>
   <body>
+    <img id="environment2" src="./lib/images/dungeon_tiles2.png" />
+    <img id="environment" src="./lib/images/dungeon_tiles.png" />
     <img id="fire" src="./lib/images/castle_tileset_part3.png" />
     <img id="torch-base" src="./lib/images/castle_tileset_part2.png" />
     <img id="player_spread" src="./lib/images/Fumiko.png" />
     <img id="test" src="./lib/images/zombie_n_skeleton2.png" />
-    <canvas id="game-canvas" width="1200" height="650"></canvas>
+    <canvas id="game-canvas"></canvas>
     <script src="./lib/keymaster.js"></script>
     <script src="bundle.js" charset="utf-8"></script>
   </body>
