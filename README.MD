@@ -2,6 +2,9 @@
 
 ###Basic Mechanics Demo
 
+A demo of the basic mechanics of this game can be previewed by downloading the
+the repo and running the "zombie_canvas/demo.html" in a web browser
+
 ###MVP
 
 Zombie Escape is a 2D browser game. The core mechanics center around players
@@ -29,20 +32,19 @@ The following has already been implemented at project outset:
 
 Day 1
 
-- [ ] Implement bone zombie movement and animation
-- [ ] Implement running zombie (similar to normal zombie, just colored red)
-- [ ] Implement Level 1 (room with three spaced torches (in center and back
-      corners), each with a normal zombie next to a torch)
+- [ ] Write skeleton zombie movement and animation
+- [ ] Write running zombie
+- [ ] Implement Level 1 (3 torches, 5 normal Zombies)
 
 Day 2
 
-- [ ] Implement Level 2 (room with 5 torches and many normal zombies)
-- [ ] Implement level 3 (room with 5 torches and runner zombies)
-- [ ] Implement level 4 (room with 4 torches in the corner and bone zombies
-        that come alive with torch lighting)
+- [ ] Implement Level 2 (many normal Zombies, 5 torches)
+- [ ] Implement level 3 (many runner zombies, 5 torches)
+- [ ] Implement level 4 (4 skeleton zombies, 5 torches)
 
 Day 3
 
 - [ ] Implement Title Screen
 - [ ] Implement Instructions
 - [ ] Implement Level transitions (move to next level, caught by zombie animation)
+- [ ] Hosting
