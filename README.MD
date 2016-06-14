@@ -3,7 +3,7 @@
 ###Basic Mechanics Demo
 
 A demo of the basic mechanics of this game can be previewed by downloading the
-the repo and running the "zombie_canvas/demo.html" in a web browser
+the repo and running the "zombie_canvas/demo.html" file in a web browser.
 
 ###MVP
 
