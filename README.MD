@@ -5,6 +5,8 @@
 A demo of the basic mechanics of this game can be previewed by downloading the
 the repo and running the "zombie_canvas/demo.html" file in a web browser.
 
+Controls: asdw for movement, f for warping. q halts the script.
+
 ###MVP
 
 Zombie Escape is a 2D browser game. The core mechanics center around players
