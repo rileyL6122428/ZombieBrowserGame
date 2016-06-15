@@ -77,3 +77,25 @@ this.ctx.drawImage(this.image, 261, 128, 27, 34, 300, 240, 35, 50);
 this.ctx.drawImage(this.image, 215, 160, 27, 35, 300, 300, 35, 50);
 this.ctx.drawImage(this.image, 190, 225, 27, 32, 300, 360, 35, 50);
 this.ctx.drawImage(this.image, 71, 225, 25, 34, 300, 420, 35, 50);
+
+//BONE ZOMBIE
+
+//down
+this.ctx.drawImage(this.image, 96, 16, 32, 48, 300, 300, 32, 48);
+this.ctx.drawImage(this.image, 128, 16, 32, 48, 300, 360, 32, 48);
+this.ctx.drawImage(this.image, 160, 16, 32, 48, 300, 420, 32, 48);
+
+//left
+this.ctx.drawImage(this.image, 96, 80, 32, 48, 300, 300, 32, 48);
+this.ctx.drawImage(this.image, 128, 80, 32, 48, 300, 360, 32, 48);
+this.ctx.drawImage(this.image, 160, 80, 32, 48, 300, 420, 32, 48);
+
+//right
+this.ctx.drawImage(this.image, 96, 144, 32, 48, 300, 300, 32, 48);
+this.ctx.drawImage(this.image, 128, 144, 32, 48, 300, 360, 32, 48);
+this.ctx.drawImage(this.image, 160, 144, 32, 48, 300, 420, 32, 48);
+
+//up
+this.ctx.drawImage(this.image, 96, 208, 32, 48, 300, 300, 32, 48);
+this.ctx.drawImage(this.image, 128, 208, 32, 48, 300, 360, 32, 48);
+this.ctx.drawImage(this.image, 160, 208, 32, 48, 300, 420, 32, 48);
