@@ -1,5 +1,12 @@
 
 build demo
 
-Implement Level 5 (bone zombies and runner zombies)
-Design and implement level structure for 5 levels
+Implement transitions for levels
+ (implement level phase (BEG, PLAY, END))
+ BEG = transition into level (fade in and draw background black, character warps in)
+ PLAY = playing phase
+ END = transistion out (Character warps out, zombies halt, level fades out)
+
+ Implement transition logic for playroom
+
+ Implement homescreen
