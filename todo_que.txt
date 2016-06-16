@@ -1,6 +1,11 @@
+1) Implement homescreen
+2) Implement zombie catch
 
-build demo
+Home screen Design
 
- Implement transition logic for playroom
-
- Implement homescreen
+(fade in on production studio?)
+(shows game title, lists levels, has a how to play option)
+(Only level one starts off as being selectable, new levels become selectable as
+their pre reqs are beaten)
+(arrows to scroll through screen)
+(starts through background)
