@@ -6,12 +6,18 @@ Implement warp out and you lose
 
 mvp
 
-(get character capture to register)
-(character flashes and then splits and disappears)
-(game reverts back to homescreen)
-(the level the player reached is now accessable from the home screen)
+change character controls
+add cooldown for warping
+reconfigure awaken ranges on zombies
+change speed if necessary
+add end game screen and navigation back to title
+add how to play
 
 Things to add for polish:
+0) refactor
+
+0.5) fix torch hit boxes
+
 1) -spice up home screen with colors on selection and
    -something in the background
    -a fade in on the initial play through of the game
