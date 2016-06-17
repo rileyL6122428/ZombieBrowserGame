@@ -1,3 +1,6 @@
+debug, fix crash (make sure all callback are properly unmounted)
+make sure beating game doesnt break level scroller in title screen
+
 
 Things to add for polish:
 0) refactor
