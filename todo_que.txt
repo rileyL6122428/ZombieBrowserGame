@@ -1,18 +1,12 @@
 mvp
 
-add cooldown for warping
-make playerIntangible during warps
-reconfigure awaken ranges on zombies
-change speed if necessary
-change title to zomphonia
 add end game screen and navigation back to title
 add how to play
 get rid of script stopping
+fix torch hitboxes
 
 Things to add for polish:
 0) refactor
-
-0.5) fix torch hit boxes
 
 1) -spice up home screen with colors on selection and
    -something in the background
