@@ -1,11 +1,21 @@
-1) Implement homescreen
 2) Implement zombie catch
 
 Home screen Design
 
-(fade in on production studio?)
-(shows game title, lists levels, has a how to play option)
-(Only level one starts off as being selectable, new levels become selectable as
-their pre reqs are beaten)
-(arrows to scroll through screen)
-(starts through background)
+Implement warp out and you lose
+
+mvp
+
+(get character capture to register)
+(character flashes and then splits and disappears)
+(game reverts back to homescreen)
+(the level the player reached is now accessable from the home screen)
+
+Things to add for polish:
+1) -spice up home screen with colors on selection and
+   -something in the background
+   -a fade in on the initial play through of the game
+
+2) -level transitions need titles and subtitles
+
+3) landing screen for endgame (some kind of cool art and thanks for playing thing)
