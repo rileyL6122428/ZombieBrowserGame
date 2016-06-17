@@ -1,6 +1,3 @@
-mvp
-
-get rid of script stopping
 
 Things to add for polish:
 0) refactor
