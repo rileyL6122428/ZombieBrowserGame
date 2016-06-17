@@ -1,4 +1,3 @@
-add navigation instructions to the title screen
 
 Things to add for polish:
 0) refactor
