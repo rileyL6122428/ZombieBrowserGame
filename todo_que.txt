@@ -1,15 +1,10 @@
-2) Implement zombie catch
-
-Home screen Design
-
-Implement warp out and you lose
-
 mvp
 
 change character controls
 add cooldown for warping
 reconfigure awaken ranges on zombies
 change speed if necessary
+change title to zomphonia
 add end game screen and navigation back to title
 add how to play
 
