@@ -1,9 +1,6 @@
 mvp
 
-add end game screen and navigation back to title
-add how to play
 get rid of script stopping
-fix torch hitboxes
 
 Things to add for polish:
 0) refactor

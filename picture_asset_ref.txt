@@ -99,3 +99,5 @@ this.ctx.drawImage(this.image, 160, 144, 32, 48, 300, 420, 32, 48);
 this.ctx.drawImage(this.image, 96, 208, 32, 48, 300, 300, 32, 48);
 this.ctx.drawImage(this.image, 128, 208, 32, 48, 300, 360, 32, 48);
 this.ctx.drawImage(this.image, 160, 208, 32, 48, 300, 420, 32, 48);
+
+//End Game sequence
