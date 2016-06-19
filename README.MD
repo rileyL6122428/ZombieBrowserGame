@@ -269,3 +269,4 @@ judge the lack of readability too harshly (T_T)
 * More attractive styling for the title screen
 * A visually appealing game ending
 * Minimal soundtrack and sound effects
+* Roaming movement for zombies that are not chasing the player.
