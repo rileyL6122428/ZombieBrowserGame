@@ -264,7 +264,6 @@
 	  if (!entrance) {
 	    frame1 = setInterval(function () {
 	      self.ctx.drawImage(self.image, img1[0], img1[1], 27, 35, self.x - self.xOffset, self.y -30, self.width, self.height);
-	      // console.log("hello?");
 	    },1000/50)
 	    setTimeout(function(){
 	      clearInterval(frame1);
@@ -345,10 +344,10 @@
 	
 	  },
 	
-	  limitVector: function (vector, newMagnitude, limit) {
+	  limitVector: function (vector, limit) {
 	    var oldMagnitude = this.distance(0, vector[0], 0, vector[1]);
 	    if (oldMagnitude < limit) { return vector }
-	    var normalizer = newMagnitude / oldMagnitude;
+	    var normalizer = limit / oldMagnitude;
 	    return [ vector[0] * normalizer, vector[1] * normalizer];
 	  }
 	}
@@ -479,7 +478,7 @@
 	    chasePlayerVec[1] + separationVec[1]
 	  ]
 	
-	  var movementVec = Util.limitVector(summedVec, this.speed, this.speed)
+	  var movementVec = Util.limitVector(summedVec, this.speed)
 	  this.x += summedVec[0];
 	  this.y -= summedVec[1];
 	};
@@ -548,12 +547,12 @@
 
 	var ScrollingUtil = __webpack_require__(8);
 	var TitleScreen = __webpack_require__(9);
-	var HowToPlay = __webpack_require__(21);
-	var LevelOne = __webpack_require__(10);
-	var LevelTwo = __webpack_require__(15);
-	var LevelThree = __webpack_require__(16);
-	var LevelFour = __webpack_require__(18);
-	var LevelFive = __webpack_require__(20);
+	var HowToPlay = __webpack_require__(10);
+	var LevelOne = __webpack_require__(11);
+	var LevelTwo = __webpack_require__(16);
+	var LevelThree = __webpack_require__(17);
+	var LevelFour = __webpack_require__(19);
+	var LevelFive = __webpack_require__(21);
 	var EndGame = __webpack_require__(22);
 	
 	
@@ -780,11 +779,9 @@
 	  if(this.inputReady) {
 	    if(key.isPressed("up")) {
 	      this.scrollUp();
-	      // console.log("test up");
 	    }
 	    if(key.isPressed("down")) {
 	      this.scrollDown();
-	      // console.log("test down");
 	    }
 	    this.readyNextInput()
 	  }
@@ -851,12 +848,78 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	function HowToPlay(ctx) {
+	  this.ctx = ctx;
+	  this.centerVer = 0;
+	  this.centerHor = 0;
+	}
+	
+	HowToPlay.prototype.play = function () {
+	  this.ctx.fillStyle = "black";
+	  this.ctx.fillRect(0,0,1200,700);
+	
+	  this.ctx.font = "48px serif";
+	  this.ctx.fillStyle = "white";
+	  this.ctx.fillText("How to PLAY", 300 + this.centerHor, 120 + this.centerVer);
+	
+	  this.ctx.font = "24px serif"
+	  this.ctx.fillText("CONTROLS :", 281 + this.centerHor, 170 + this.centerVer);
+	  this.ctx.fillText("LEVEL PROGRESSION :", 160 + this.centerHor, 260 + this.centerVer);
+	  this.ctx.fillText("ZOMBIES :", 300 + this.centerHor, 350 + this.centerVer);
+	  this.ctx.fillText("TO TITLE SCREEN :", 204 + this.centerHor, 400 + this.centerVer);
+	
+	  this.ctx.fillText(
+	    "Use the arrow keys to move. Hold space and press",
+	    500 + this.centerHor, 170 + this.centerVer
+	  )
+	
+	  this.ctx.fillText(
+	    "a direction to warp. Warp cooldown is 3 seconds.",
+	    500 + this.centerHor, 210 + this.centerVer
+	  )
+	
+	  this.ctx.fillText(
+	    "Light all torches to progress to the next level.",
+	    500 + this.centerHor, 260 + this.centerVer
+	  );
+	  this.ctx.fillText(
+	    "Torches are lit by standing near them.",
+	    500 + this.centerHor, 300 + this.centerVer
+	  )
+	
+	  this.ctx.fillText(
+	    "E-V-A-D-E.",
+	    500 + this.centerHor, 350 + this.centerVer
+	  );
+	
+	  this.ctx.fillText(
+	    "Press enter.",
+	    500 + this.centerHor, 400 + this.centerVer
+	  )
+	
+	};
+	
+	HowToPlay.prototype.finished = function () {
+	  return key.isPressed("enter");
+	};
+	
+	HowToPlay.prototype.lost = function () {
+	  return false;
+	};
+	
+	module.exports = HowToPlay;
+
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
-	var Level = __webpack_require__(11);
-	var Torch = __webpack_require__(13);
-	var Wall = __webpack_require__(14);
+	var Level = __webpack_require__(12);
+	var Torch = __webpack_require__(14);
+	var Wall = __webpack_require__(15);
 	var Player = __webpack_require__(3);
 	var NormalZombie = __webpack_require__(5);
 	
@@ -915,10 +978,10 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Util = __webpack_require__(12);
+	var Util = __webpack_require__(13);
 	
 	function Level() {
 	  this.phase = 0;
@@ -1096,7 +1159,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -1179,7 +1242,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
@@ -1222,7 +1285,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	function Wall (x, y, width, height, player) {
@@ -1311,13 +1374,13 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
-	var Level = __webpack_require__(11);
-	var Torch = __webpack_require__(13);
-	var Wall = __webpack_require__(14);
+	var Level = __webpack_require__(12);
+	var Torch = __webpack_require__(14);
+	var Wall = __webpack_require__(15);
 	var Player = __webpack_require__(3);
 	var NormalZombie = __webpack_require__(5);
 	
@@ -1381,16 +1444,16 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
-	var Level = __webpack_require__(11);
-	var Torch = __webpack_require__(13);
-	var Wall = __webpack_require__(14);
+	var Level = __webpack_require__(12);
+	var Torch = __webpack_require__(14);
+	var Wall = __webpack_require__(15);
 	var Player = __webpack_require__(3);
 	var NormalZombie = __webpack_require__(5);
-	var RunnerZombie = __webpack_require__(17);
+	var RunnerZombie = __webpack_require__(18);
 	
 	function LevelThree(ctx) {
 	  this.ctx = ctx;
@@ -1449,7 +1512,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var NormalZombie = __webpack_require__(5);
@@ -1468,15 +1531,15 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
-	var Level = __webpack_require__(11);
-	var Torch = __webpack_require__(13);
-	var Wall = __webpack_require__(14);
+	var Level = __webpack_require__(12);
+	var Torch = __webpack_require__(14);
+	var Wall = __webpack_require__(15);
 	var Player = __webpack_require__(3);
-	var BoneZombie = __webpack_require__(19);
+	var BoneZombie = __webpack_require__(20);
 	
 	function LevelFour(ctx) {
 	  this.ctx = ctx;
@@ -1516,7 +1579,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	Util = __webpack_require__(4);
@@ -1658,17 +1721,17 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var Util = __webpack_require__(4);
-	var Level = __webpack_require__(11);
-	var Torch = __webpack_require__(13);
-	var Wall = __webpack_require__(14);
+	var Level = __webpack_require__(12);
+	var Torch = __webpack_require__(14);
+	var Wall = __webpack_require__(15);
 	var Player = __webpack_require__(3);
 	var NormalZombie = __webpack_require__(5);
-	var RunnerZombie = __webpack_require__(17);
-	var BoneZombie = __webpack_require__(19);
+	var RunnerZombie = __webpack_require__(18);
+	var BoneZombie = __webpack_require__(20);
 	
 	function LevelFive(ctx) {
 	  this.ctx = ctx;
@@ -1731,76 +1794,10 @@
 
 
 /***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-	function HowToPlay(ctx) {
-	  this.ctx = ctx;
-	  this.centerVer = 0;
-	  this.centerHor = 0;
-	}
-	
-	HowToPlay.prototype.play = function () {
-	  this.ctx.fillStyle = "black";
-	  this.ctx.fillRect(0,0,1200,700);
-	
-	  this.ctx.font = "48px serif";
-	  this.ctx.fillStyle = "white";
-	  this.ctx.fillText("How to PLAY", 300 + this.centerHor, 120 + this.centerVer);
-	
-	  this.ctx.font = "24px serif"
-	  this.ctx.fillText("CONTROLS :", 281 + this.centerHor, 170 + this.centerVer);
-	  this.ctx.fillText("LEVEL PROGRESSION :", 160 + this.centerHor, 260 + this.centerVer);
-	  this.ctx.fillText("ZOMBIES :", 300 + this.centerHor, 350 + this.centerVer);
-	  this.ctx.fillText("TO TITLE SCREEN :", 204 + this.centerHor, 400 + this.centerVer);
-	
-	  this.ctx.fillText(
-	    "Use the arrow keys to move. Hold space and press",
-	    500 + this.centerHor, 170 + this.centerVer
-	  )
-	
-	  this.ctx.fillText(
-	    "a direction to warp. Warp cooldown is 3 seconds.",
-	    500 + this.centerHor, 210 + this.centerVer
-	  )
-	
-	  this.ctx.fillText(
-	    "Light all torches to progress to the next level.",
-	    500 + this.centerHor, 260 + this.centerVer
-	  );
-	  this.ctx.fillText(
-	    "Torches are lit by standing near them.",
-	    500 + this.centerHor, 300 + this.centerVer
-	  )
-	
-	  this.ctx.fillText(
-	    "E-V-A-D-E.",
-	    500 + this.centerHor, 350 + this.centerVer
-	  );
-	
-	  this.ctx.fillText(
-	    "Press enter.",
-	    500 + this.centerHor, 400 + this.centerVer
-	  )
-	
-	};
-	
-	HowToPlay.prototype.finished = function () {
-	  return key.isPressed("enter");
-	};
-	
-	HowToPlay.prototype.lost = function () {
-	  return false;
-	};
-	
-	module.exports = HowToPlay;
-
-
-/***/ },
 /* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var Util = __webpack_require__(12);
+	var Util = __webpack_require__(13);
 	
 	function EndGame (ctx) {
 	  this.ctx = ctx;

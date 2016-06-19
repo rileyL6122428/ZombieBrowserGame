@@ -1,52 +1,271 @@
-#Zombie Escape
+#Tales of Zomphonia
 
-###Basic Mechanics Demo
+[Tales of Zomphonia Live][git_page]
+[git_page]: https://rileyl6122428.github.io/game.html
 
-A demo of the basic mechanics of this game can be previewed by downloading the
-the repo and running the "zombie_canvas/demo.html" file in a web browser.
+A 2d browser game. Players light torches while evading capture by zombies to
+progress through levels. On the title screen, the arrow keys are used to
+navigate options and the space bar is used to choose an option. When actually
+playing the game, the arrow keys are used to move the player avatar. Pressing
+the space bar while moving the player up, down, left, or right will teleport the
+player. Teleporting has a "cool down" of three seconds (i.e. you have to wait
+three seconds before consecutively teleporting).
 
-Controls: asdw for movement, f for warping. q halts the script.
+##Languages, Libraries and Assets
+Tales of Zomphonia is written in JavaScript. It renders in an HTML [canvas][canvas_wiki]
+element.
 
-###MVP
+Player input is supported through the [keymaster library][keymaster_lib]. The
+code for selective scrolling was posted by stack overflow user [galambalazs.][stack_overflow_post]
 
-Zombie Escape is a 2D browser game. The core mechanics center around players
-progressing through levels by lighting (touching) torches while evading capture
-by zombies. The features absolutely necessary for this game to function are:
+All art assets were taken from OpenGameArt.org. The player sprite sheet was
+created by user [sylvius fischer.][player_sprite_sheet] The zombie sprite sheets
+were created by user [Reemax.][zombie_sprite_sheet] The floor and wall level art
+were created by user [Buch.][wall_and_floor] The torch and fire sprites were
+created by user [rubberduck.][torch_and_fire]
 
-* A moving/ animated player avatar
-* Animated zombies that chase the player
-* Zombie variety (3 to 4 types of zombies)
-* Switches/ lightable torches
-* 3 to 5 playable levels
-* A home screen with instructions on how to play
 
-###Wireframes
+[canvas_wiki]:  https://en.wikipedia.org/wiki/Canvas_element
+[keymaster_lib]: https://github.com/madrobby/keymaster
+[stack_overflow_post]: http://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
+[player_sprite_sheet]: http://opengameart.org/content/fumiko-complete-charset
+[zombie_sprite_sheet]: http://opengameart.org/content/zombie-and-skeleton-32x48
+[wall_and_floor]:http://opengameart.org/content/dungeon-tileset
+[torch_and_fire]: http://opengameart.org/content/pixel-art-castle-tileset
 
-###Implementation Timeline
+##Code Snippets
 
-The following has already been implemented at project outset:
+###Zombie Movement
+Zombie movement is achieved through superposition/ decomposition of vectors.
+When awakened, each normal (green) zombie has a chase player vector (`chasePlayerVec`)
+added to its position. The vector points directly at the player and has
+magnitude equal to the speed of the zombie. The specific direction and the
+decomposition into x and y components of the `chasePlayerVec` are calculated
+with trigonometry:
 
-1) player with movement
-2) player warping
-3) Normal zombie movement and animation
-4) torch object and lighting
-5) basic level background
+```JavaScript
+  Zombie.prototype.chasePlayerVec = function () {
+    this.theta = this.calculateTheta(this.player);
+    var xComp = Math.cos(this.theta) * this.speed;
+    var yComp = Math.sin(this.theta) * this.speed;
+    return [xComp, yComp];
+  };
+```
+where `calculateTheta` is defined to be the following helper method.
 
-Day 1
+```JavaScript
+  Zombie.prototype.calculateTheta = function (target) {
+    return Math.atan2(this.y - target.y, target.x - this.x);
+  };
+```
 
-- [ ] Write skeleton zombie movement and animation
-- [ ] Write running zombie
-- [ ] Implement Level 1 (3 torches, 5 normal Zombies)
+To ensure that normal zombies do not occupy the same space as they chase the
+player, a separation vector is added to the chase player vector to get each
+zombies movement vector. If n is the total number of normal zombies in a level,
+the separation vector for a specific normal zombie is the sum of n - 1 new
+vectors, each corresponding to one of the other normal zombies. The direction of
+the vectors points away from the other normal zombie.
 
-Day 2
+The magnitude of the vector is as an exponential decay:
+2^(-`distance`/`herdingCoefficent`). In short, the magnitude of each individual
+separation vector gets larger as the `distance` between two zombies decreases, and
+the magnitude caps out at 1 (i.e. 2^0 = 1). The `herdingCoefficent` determines
+how quickly the magnitude of the separation vector approaches 1 as the distance
+between two zombies becomes small. The greater the `herdingCoefficent`, the more
+"personal space" is maintained between zombies. Here is the corresponding code:
 
-- [ ] Implement Level 2 (many normal Zombies, 5 torches)
-- [ ] Implement level 3 (many runner zombies, 5 torches)
-- [ ] Implement level 4 (4 skeleton zombies, 5 torches)
+```JavaScript
+  Zombie.prototype.separationVec = function () {
+    var separationVec = [0, 0];
+    var self = this;
 
-Day 3
+    this.otherZombies.forEach(function (zombie){
+      var magnitude = self.separationMagnitude(Util.distance(self.x, zombie.x, self.y, zombie.y));
+      var theta = self.calculateTheta(zombie);
+      separationVec = [
+        separationVec[0] - Math.cos(theta) * magnitude,
+        separationVec[1] - Math.sin(theta) * magnitude
+      ]
+    });
 
-- [ ] Implement Title Screen
-- [ ] Implement Instructions
-- [ ] Implement Level transitions (move to next level, caught by zombie animation)
-- [ ] Hosting
+    return separationVec;
+  };
+
+  Zombie.prototype.separationMagnitude = function (distance) {
+    return Math.pow(2, -distance/this.herdingCoefficent);
+  };
+```
+
+The `chasePlayerVec` and `separationVec` are then summed to get the final
+`movementVec`. The `Util.limitVector` function limits the magnitude of the
+resultant vector to the zombie's speed.
+
+```JavaScript
+  Zombie.prototype.move = function () {
+    var chasePlayerVec = this.chasePlayerVec();
+    var separationVec = this.separationVec();
+
+    var summedVec = [
+      chasePlayerVec[0] + separationVec[0],
+      chasePlayerVec[1] + separationVec[1]
+    ]
+
+    var movementVec = Util.limitVector(summedVec, this.speed)
+    this.x += summedVec[0];
+    this.y -= summedVec[1];
+  };
+```
+Movement for the runner (blue) zombie works similarly. The only difference is
+that the speed of the runner zombie is greater.
+
+Movement for bone zombies is simplified from the normal zombie movement. Bone
+zombies do not have any separation vectors added to their movement, so they can
+occupy the same space as another zombie in the same level. Also, their movement
+occurs in phases: they charge at the player in a straight line until they hit a
+wall. Once they hit a wall, they cooldown for a brief period of time, then begin
+another charge at the player. The cooldown phase is ended by a setTimeout
+callback. Here is the corresponding code:
+
+```JavaScript
+  BoneZombie.prototype.chasePlayer = function () {
+    this.chargeAndCoolDown();
+  };
+
+  BoneZombie.prototype.chargeAndCoolDown = function () {
+    if (this.chargeReady) { this.charge(); }
+    if (this.startCoolDown) { this.coolDown(); }
+  };
+
+  BoneZombie.prototype.charge = function () {
+    if(this.outOfBounds()) {
+      this.chargeReady = false;
+      this.startCoolDown = true;
+      this.correctPosition();
+    } else {
+      this.move();
+    }
+  };
+
+  BoneZombie.prototype.move = function () {
+    this.x += this.movementVec[0];
+    this.y -= this.movementVec[1];
+  };
+
+  BoneZombie.prototype.coolDown = function () {
+    this.startCoolDown = false;
+
+    var self = this;
+    setTimeout(function (){
+      self.calibrateMovementVector();
+      self.chargeReady = true;
+    }, 500);
+  };
+
+  BoneZombie.prototype.calibrateMovementVector = function () {
+    this.movementVec = this.chasePlayerVec();
+  };
+```
+
+###Animation
+
+When awake and chasing the player, zombies are animated through a series of
+three out of twelve frames. One frame corresponds to the left foot being
+positioned in front of the zombie, another the right, and the final frame being
+neither. Which three of the twelve frames a zombie uses to animate its
+motion depends on the current direction it is moving towards. A zombie is moving
+either UP, DOWN, LEFT, or RIGHT. A helper method inherited by all zombie types
+determines which specific animation function should be called:
+
+```JavaScript
+  Zombie.prototype.animate = function (ctx) {
+    switch (Util.direction(this.theta)) {
+      case "RIGHT": this.animateRight(ctx); break;
+      case "LEFT" : this.animateLeft(ctx);  break;
+      case "DOWN" : this.animateDown(ctx);  break;
+      case "UP"   : this.animateUp(ctx);    break;
+    }
+  };
+```
+
+where ctx in the above snippet is the canvas context. An example of one of the
+specific animation functions can be seen below. A full animation cycle is
+completed once every full second. The canvas api is used to grab the specific
+section of the zombie sprite sheet corresponding to the desired frame (`this.image`
+denotes the entire zombie sprite sheet).
+
+```JavaScript
+NormalZombie.prototype.animateUp = function (ctx) {
+  var millisecondCounter = (new Date()).getMilliseconds();
+
+  if (millisecondCounter < 250 && this.awake) {
+    ctx.drawImage(this.image, 0, 215, 33, 42, this.x - 18, this.y - 25, this.width, this.height);
+  } else if (millisecondCounter >= 500 && millisecondCounter < 750 && this.awake) {
+    ctx.drawImage(this.image, 64, 215, 33, 42, this.x - 18, this.y - 25, this.width, this.height);
+  } else {
+    ctx.drawImage(this.image, 33, 215, 33, 42, this.x - 18, this.y - 25, this.width, this.height);
+  }
+};
+```
+
+Basic player animation is accomplished through similar means. Warping animation
+for the player is much more complicated. In this game, warping is performed
+through a series of `setTimeout` and `clearInterval` callbacks that both move
+the player instance and render the desired frame. Here is the player warp
+function:
+*NOTE*: this method is pending some major revision/ refactoring. Please don't
+judge the lack of readability too harshly (T_T)
+
+```JavaScript
+  Player.prototype._warp = function (img1, img2, img3, img4, direction, entrance, exit) {
+    this.warping = true;
+    this.warpReady = false;
+    var self = this;
+    var frameRate = 1000 / 50;
+
+    if (!entrance) {
+      frame1 = setInterval(function () {
+        self.ctx.drawImage(self.image, img1[0], img1[1], 27, 35, self.x - self.xOffset, self.y -30, self.width, self.height);
+      }, frameRate)
+      setTimeout(function(){
+        clearInterval(frame1);
+        frame2 = setInterval(function () {
+          self.ctx.drawImage(self.image, img2[0], img2[1], 27, 34, self.x - self.xOffset, self.y - 30, self.width, self.height);
+        }, frameRate)
+      }, 100)
+
+      setTimeout(function () { clearInterval(frame2); }, 200)
+    }
+
+    if(!exit) {
+      setTimeout (function () {
+        self.warpIncrementer(direction, 135);
+        frame3 = setInterval(function () {
+          self.ctx.drawImage(self.image, img3[0], img3[1], 27, 35, self.x - self.xOffset, self.y -30, self.width, self.height);
+        }, frameRate)
+      }, 500)
+
+      setTimeout (function () {
+        clearInterval(frame3);
+        self.warpIncrementer(direction, 20);
+        frame4 = setInterval(function () {
+          self.ctx.drawImage(self.image, img4[0], img4[1], 27, 34, self.x - self.xOffset, self.y - 30, self.width, self.height);
+        }, frameRate)
+      }, 610)
+
+      setTimeout(function(){
+        self.warping = false;
+        clearInterval(frame4)
+      }, 710)
+
+      setTimeout(function () { self.warpReady = true; }, 3710)
+    }
+  };
+```
+
+##Pending Features
+
+* Greater variety in zombie types
+* Additional levels
+* More attractive styling for the title screen
+* A visually appealing game ending
+* Minimal soundtrack and sound effects
