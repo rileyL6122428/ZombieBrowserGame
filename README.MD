@@ -270,3 +270,4 @@ judge the lack of readability too harshly (T_T)
 * A visually appealing game ending
 * Minimal soundtrack and sound effects
 * Roaming movement for zombies that are not chasing the player.
+* Cookies that store a users progress through levels
