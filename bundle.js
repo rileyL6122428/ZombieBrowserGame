@@ -326,7 +326,7 @@
 	    this.readyNextInput()
 	  }
 	
-	  if(key.isPressed("space")) {
+	  if(key.isPressed("space") || key.isPressed("enter")) {
 	    if(this.scrollIdx === 5) {
 	      this.levelSelected = 0.5
 	    } else {
