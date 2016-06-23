@@ -209,57 +209,27 @@ NormalZombie.prototype.animateUp = function (ctx) {
 
 Basic player animation is accomplished through similar means. Warping animation
 for the player is much more complicated. In this game, warping is performed
-through a series of `setTimeout` and `clearInterval` callbacks that both move
-the player instance and render the desired frame. Here is the player warp
-function:
-*NOTE*: this method is pending some major revision/ refactoring. Please don't
-judge the lack of readability too harshly (T_T)
+through a series of timed callbacks. The high level outline for warping is shown
+below. The `direction`, `entrance`, and `exit` arguments extend the use of the
+warp function so that it can animate the player in and out of levels at their
+beginnings and ends.
 
 ```JavaScript
-  Player.prototype._warp = function (img1, img2, img3, img4, direction, entrance, exit) {
-    this.warping = true;
-    this.warpReady = false;
-    var self = this;
-    var frameRate = 1000 / 50;
+Player.prototype._warp = function (img1, img2, img3, img4, direction, entrance, exit) {
+  this.warping = true;
+  this.warpReady = false;
 
-    if (!entrance) {
-      frame1 = setInterval(function () {
-        self.ctx.drawImage(self.image, img1[0], img1[1], 27, 35, self.x - self.xOffset, self.y -30, self.width, self.height);
-      }, frameRate)
-      setTimeout(function(){
-        clearInterval(frame1);
-        frame2 = setInterval(function () {
-          self.ctx.drawImage(self.image, img2[0], img2[1], 27, 34, self.x - self.xOffset, self.y - 30, self.width, self.height);
-        }, frameRate)
-      }, 100)
+  if (!entrance) {
+    this.showFrame1(img1);
+    this.executeFrame2AndClearFrame1(img2);
+  }
 
-      setTimeout(function () { clearInterval(frame2); }, 200)
-    }
-
-    if(!exit) {
-      setTimeout (function () {
-        self.warpIncrementer(direction, 135);
-        frame3 = setInterval(function () {
-          self.ctx.drawImage(self.image, img3[0], img3[1], 27, 35, self.x - self.xOffset, self.y -30, self.width, self.height);
-        }, frameRate)
-      }, 500)
-
-      setTimeout (function () {
-        clearInterval(frame3);
-        self.warpIncrementer(direction, 20);
-        frame4 = setInterval(function () {
-          self.ctx.drawImage(self.image, img4[0], img4[1], 27, 34, self.x - self.xOffset, self.y - 30, self.width, self.height);
-        }, frameRate)
-      }, 610)
-
-      setTimeout(function(){
-        self.warping = false;
-        clearInterval(frame4)
-      }, 710)
-
-      setTimeout(function () { self.warpReady = true; }, 3710)
-    }
-  };
+  if(!exit) {
+    this.showFrame3(img3, direction);
+    this.executeFrame4AndClearFrame3(img4, direction)
+    this.startWarpCoolDown();
+  }
+};
 ```
 
 ##Pending Features
