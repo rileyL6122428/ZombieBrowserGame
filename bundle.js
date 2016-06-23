@@ -278,19 +278,20 @@
 	  this.ctx.globalAlpha = 1;
 	  this.ctx.font = "18px serif";
 	
+	  var directionsHorizontalOffset = 23;
 	  this.ctx.fillText(
 	    "Use the arrow keys to navigate",
-	    455, 490
+	    455 + directionsHorizontalOffset, 490
 	  );
 	
 	  this.ctx.fillText(
 	    "Press space to choose",
-	    490, 520
+	    490 + directionsHorizontalOffset, 520
 	  );
 	
 	  this.ctx.fillText(
 	    "To scroll, hold 'u'",
-	    510, 550
+	    510 + directionsHorizontalOffset, 550
 	
 	  )
 	};
