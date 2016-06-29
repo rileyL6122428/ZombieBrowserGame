@@ -100,7 +100,6 @@
 	  this.ctx = ctx
 	  this.currentLevelNumber = 0;
 	  this.highestLevel = 1;
-	  // this.titleScreen = new TitleScreen(this.ctx)
 	
 	  this.instantiateNewLevel();
 	  this.instantiationNeeded = false;
@@ -582,7 +581,7 @@
 	    if (theta <  Math.PI / 4 && theta > -1 * Math.PI / 4)    { return "RIGHT"; }
 	    if (theta < -Math.PI / 4 && theta > -3 * Math.PI / 4)    { return "DOWN";  }
 	    if (theta >  Math.PI / 4 && theta <  3 * Math.PI / 4)    { return "UP";    }
-	    if (theta <  Math.PI     && theta >  3 * Math.PI / 4 ||
+	    if (theta <=  Math.PI     && theta >  3 * Math.PI / 4 ||
 	        theta > -Math.PI     && theta < -3 * Math.PI / 4)    { return "LEFT";  }
 	
 	  },
@@ -1123,7 +1122,6 @@
 	};
 	
 	Player.prototype.warpIncrementer = function (direction, distance) {
-	  // debugger
 	  switch(direction) {
 	    case "DOWN" : this.y += distance; break;
 	    case "RIGHT": this.x += distance; break;
@@ -1655,7 +1653,7 @@
 	};
 	
 	BoneZombie.prototype.chargeAndCoolDown = function () {
-	  if (this.chargeReady) { this.charge(); }
+	  if (this.chargeReady) { this.charge(); } // && not out of bounds?
 	  if (this.startCoolDown) { this.coolDown(); }
 	};
 	
@@ -1693,6 +1691,7 @@
 	};
 	
 	BoneZombie.prototype.outOfBounds = function () {
+	
 	  return (
 	    this.x > this.wall.rightBoundary() ||
 	    this.x < this.wall.leftBoundary()  ||
@@ -1723,7 +1722,6 @@
 	
 	BoneZombie.prototype.animateLeft = function (ctx) {
 	  var millisecondCounter = (new Date()).getMilliseconds();
-	
 	  if (millisecondCounter < 250 && this.chargeReady) {
 	    ctx.drawImage(this.image, 96, 80, 32, 48, this.x - 15, this.y - 20, this.width, this.height);
 	  } else if (millisecondCounter >= 500 && millisecondCounter < 750 && this.chargeReady) {
@@ -1735,7 +1733,6 @@
 	
 	BoneZombie.prototype.animateDown = function (ctx) {
 	  var millisecondCounter = (new Date()).getMilliseconds();
-	
 	  if (millisecondCounter < 250 && this.chargeReady) {
 	    ctx.drawImage(this.image, 96, 16, 32, 48, this.x - 15, this.y - 20, this.width, this.height);
 	  } else if (millisecondCounter >= 500 && millisecondCounter < 750 && this.chargeReady) {
