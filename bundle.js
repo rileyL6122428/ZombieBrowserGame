@@ -304,12 +304,12 @@
 	  var directionsHorizontalOffset = 23;
 	  this.ctx.fillText(
 	    "Use the arrow keys to navigate",
-	    455 + directionsHorizontalOffset, 490
+	    457 + directionsHorizontalOffset, 490
 	  );
 	
 	  this.ctx.fillText(
-	    "Press space to choose",
-	    490 + directionsHorizontalOffset, 520
+	    "Press space or enter to choose",
+	    460 + directionsHorizontalOffset, 520
 	  );
 	
 	  this.ctx.fillText(
@@ -363,7 +363,7 @@
 	    this.readyNextInput()
 	  }
 	
-	  if(key.isPressed("space")) {
+	  if(key.isPressed("space") || key.isPressed("enter")) {
 	    if(this.scrollIdx === 5) {
 	      this.levelSelected = 0.5
 	    } else {
@@ -463,14 +463,14 @@
 	  );
 	
 	  this.ctx.fillText(
-	    "Press enter.",
+	    "Press b.",
 	    500 + this.centerHor, 400 + this.centerVer
 	  )
 	
 	};
 	
 	HowToPlay.prototype.finished = function () {
-	  return key.isPressed("enter");
+	  return key.isPressed("b");
 	};
 	
 	HowToPlay.prototype.lost = function () {
