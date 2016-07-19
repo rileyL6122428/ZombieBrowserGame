@@ -1,6 +1,6 @@
 #Tales of Zomphonia
 
-
+![Zomphonia Preview](https://raw.githubusercontent.com/rileyL6122428/zombie_canvas/docs/zombie_game_prev_2.png)
 
 [Tales of Zomphonia Live][git_page]
 [git_page]: https://rileyl6122428.github.io/game.html
