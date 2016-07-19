@@ -1,5 +1,7 @@
 #Tales of Zomphonia
 
+
+
 [Tales of Zomphonia Live][git_page]
 [git_page]: https://rileyl6122428.github.io/game.html
 
@@ -12,8 +14,7 @@ player. Teleporting has a "cool down" of three seconds (i.e. you have to wait
 three seconds before consecutively teleporting).
 
 ##Languages, Libraries and Assets
-Tales of Zomphonia is written in JavaScript. It renders in an HTML [canvas][canvas_wiki]
-element.
+Tales of Zomphonia is written in JavaScript. It renders in an HTML [canvas][canvas_wiki] element.
 
 Player input is supported through the [keymaster library][keymaster_lib]. The
 code for selective scrolling was posted by stack overflow user [galambalazs.][stack_overflow_post]
